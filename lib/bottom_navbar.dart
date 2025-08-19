@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tugas13_flutter/home.dart';
+import 'package:tugas13_flutter/user_screen.dart';
+// import 'package:tugas13_flutter/tambah_data.dart';
 
 class BottomNavigator extends StatefulWidget {
   const BottomNavigator({super.key});
@@ -11,18 +12,20 @@ class BottomNavigator extends StatefulWidget {
 class _BottomNavigatorState extends State<BottomNavigator> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [const HomePage(), const AboutPage()];
+  final List<Widget> _pages = [const TugasSebelas(), const AboutPage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: _pages[_selectedIndex],
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[100],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xff21BDCA),
-        unselectedItemColor: Colors.red,
+        selectedItemColor: Color(0xFF1A2A80),
+        unselectedItemColor: Colors.grey,
         onTap: (int index) {
           setState(() {
             _selectedIndex = index;
@@ -43,6 +46,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       // appBar: AppBar(
       //   title: const Text("About Page"),
       //   backgroundColor: Colors.amberAccent,
