@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tugas13_flutter/home.dart';
-import 'package:tugas13_flutter/views/register.dart';
+import 'package:tugas13_flutter/auth/register.dart';
+import 'package:tugas13_flutter/views/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -180,7 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(
+                              builder: (context) => SiswaHomePage(),
+                            ),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
