@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -17,6 +18,13 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isConfirmPasswordVisible = false;
   final _formKey = GlobalKey<FormState>();
 
+  Future<void> _saveUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('name', nameController.text.trim());
+    await prefs.setString('phone', phoneController.text.trim());
+    await prefs.setString('password', passwordController.text.trim());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,86 +33,31 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 80),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30,
+                vertical: 120,
+              ),
               child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Create Account",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text(
+                    const SizedBox(height: 8),
+                    const Text(
                       "Sign up to get started",
                       style: TextStyle(fontSize: 14, color: Color(0xFF888888)),
                     ),
 
-                    SizedBox(height: 25),
-                    // Stack(
-                    //   alignment: (Alignment.center),
-                    //   children: [
-                    //     Container(
-                    //       height: 56,
-                    //       width: 327,
-                    //       padding: EdgeInsets.symmetric(horizontal: 4),
-                    //       decoration: BoxDecoration(
-                    //         color: Color(0xFFF5F5F5),
-                    //         borderRadius: BorderRadius.circular(8),
-                    //       ),
-                    //       child: Row(
-                    //         children: [
-                    //           Container(
-                    //             height: 48,
-                    //             width: 151,
-                    //             decoration: BoxDecoration(
-                    //               color: Colors.white,
-                    //               borderRadius: BorderRadius.circular(8),
-                    //             ),
-                    //             alignment: Alignment.center,
-                    //             child: Text(
-                    //               "Phone Number",
-                    //               style: TextStyle(
-                    //                 fontSize: 16,
-                    //                 color: Color(0xFF646464),
-                    //                 fontWeight: FontWeight.w500,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           Container(
-                    //             height: 48,
-                    //             width: 151,
-                    //             decoration: BoxDecoration(
-                    //               borderRadius: BorderRadius.circular(8),
-                    //             ),
-                    //             alignment: Alignment.center,
-                    //             child: TextButton(
-                    //               onPressed: () {
-                    //                 // Navigate to email register page if you have one
-                    //               },
-                    //               child: Text(
-                    //                 "Email",
-                    //                 style: TextStyle(
-                    //                   fontSize: 16,
-                    //                   color: Color(0xFF888888),
-                    //                   fontWeight: FontWeight.w400,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(height: 30),
+                    const SizedBox(height: 25),
 
-                    // Full Name Input
-                    Text(
+                    const Text(
                       'Full Name',
                       style: TextStyle(
                         color: Color(0xff888888),
@@ -112,11 +65,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 10),
                     TextFormField(
+                      controller: nameController,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -130,10 +86,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 20),
 
                     // Phone Number Input
-                    Text(
+                    const Text(
                       'Phone Number',
                       style: TextStyle(
                         color: Color(0xff888888),
@@ -141,11 +97,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 10),
                     TextFormField(
+                      controller: phoneController,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -159,10 +118,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 20),
 
                     // Password Input
-                    Text(
+                    const Text(
                       'Password',
                       style: TextStyle(
                         color: Color(0xff888888),
@@ -170,12 +129,15 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 10),
                     TextFormField(
+                      controller: passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: !_isPasswordVisible,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -202,10 +164,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 20),
 
                     // Confirm Password Input
-                    Text(
+                    const Text(
                       'Confirm Password',
                       style: TextStyle(
                         color: Color(0xff888888),
@@ -213,12 +175,15 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     TextFormField(
+                      controller: confrimPasswordController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: !_isConfirmPasswordVisible,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -240,20 +205,22 @@ class _RegisterPageState extends State<RegisterPage> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Confirm password cannot be empty';
+                        } else if (value != passwordController.text) {
+                          return 'Passwords do not match';
                         }
-                        // Note: In real implementation, you should compare with actual password field
                         return null;
                       },
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
 
                     // Register Button
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          // Navigate to success page or show success message
+                          await _saveUserData();
+
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text(
                                 "Registration Success",
                                 textAlign: TextAlign.center,
@@ -266,15 +233,15 @@ class _RegisterPageState extends State<RegisterPage> {
                               backgroundColor: Color(0xff21BDCA),
                             ),
                           );
-                          // You can navigate to login page or home page here
-                          Navigator.pop(context);
+
+                          Navigator.pop(context); // kembali ke LoginPage
                         } else {
                           showDialog(
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Registration Failed"),
-                                content: Text(
+                                title: const Text("Registration Failed"),
+                                content: const Text(
                                   "Please fill all required fields correctly",
                                 ),
                                 backgroundColor: Colors.grey[100],
@@ -283,7 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: Text("OK"),
+                                    child: const Text("OK"),
                                   ),
                                 ],
                               );
@@ -292,14 +259,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff21BDCA),
-                        fixedSize: Size(327, 56),
+                        backgroundColor: const Color(0xFF1A2A80),
+                        fixedSize: const Size(350, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),
                         ),
                         elevation: 0,
                       ),
-                      child: Text(
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(
                           fontSize: 16,
@@ -308,117 +275,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
-
-                    // Divider
-                    // Row(
-                    //   children: [
-                    //     Expanded(child: Divider()),
-                    //     Padding(
-                    //       padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    //       child: Text(
-                    //         'Or Sign Up With',
-                    //         style: TextStyle(
-                    //           color: Color(0xff888888),
-                    //           fontSize: 12,
-                    //           fontWeight: FontWeight.w400,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     Expanded(child: Divider()),
-                    //   ],
-                    // ),
-
-                    // SizedBox(height: 30),
-
-                    // Social Media Buttons
-                    // Row(
-                    //   children: [
-                    //     Expanded(
-                    //       child: SizedBox(
-                    //         height: 48,
-                    //         child: ElevatedButton(
-                    //           onPressed: () {},
-                    //           style: ElevatedButton.styleFrom(
-                    //             backgroundColor: Color(0xffF5F5F5),
-                    //             shape: RoundedRectangleBorder(
-                    //               borderRadius: BorderRadius.circular(8),
-                    //             ),
-                    //             elevation: 0,
-                    //           ),
-                    //           child: Row(
-                    //             mainAxisSize: MainAxisSize.min,
-                    //             mainAxisAlignment: MainAxisAlignment.center,
-                    //             children: [
-                    //               Image.asset(
-                    //                 'assets/photos/Google.jpg',
-                    //                 width: 16,
-                    //                 height: 16,
-                    //               ),
-                    //               SizedBox(width: 8),
-                    //               Text(
-                    //                 'Google',
-                    //                 style: TextStyle(
-                    //                   color: Color(0xff222222),
-                    //                   fontWeight: FontWeight.w400,
-                    //                   fontSize: 14,
-                    //                 ),
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     SizedBox(width: 16),
-                    //     Expanded(
-                    //       child: SizedBox(
-                    //         height: 48,
-                    //         child: ElevatedButton(
-                    //           onPressed: () {},
-                    //           style: ElevatedButton.styleFrom(
-                    //             backgroundColor: Color(0xffF5F5F5),
-                    //             shape: RoundedRectangleBorder(
-                    //               borderRadius: BorderRadius.circular(8),
-                    //             ),
-                    //             elevation: 0,
-                    //           ),
-                    //           child: Row(
-                    //             mainAxisSize: MainAxisSize.min,
-                    //             mainAxisAlignment: MainAxisAlignment.center,
-                    //             children: [
-                    //               Image.asset(
-                    //                 'assets/photos/facebook.jpg',
-                    //                 width: 16,
-                    //                 height: 16,
-                    //               ),
-                    //               SizedBox(width: 8),
-                    //               Text(
-                    //                 'Facebook',
-                    //                 style: TextStyle(
-                    //                   color: Color(0xff222222),
-                    //                   fontWeight: FontWeight.w400,
-                    //                   fontSize: 14,
-                    //                 ),
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
 
                     // Sign In Link
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pop(context); // Navigate back to login page
+                          Navigator.pop(context);
                         },
                         child: Text.rich(
                           TextSpan(
                             text: "Already have an account? ",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xff888888),
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -426,8 +294,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             children: [
                               TextSpan(
                                 text: 'Sign In',
-                                style: TextStyle(
-                                  color: Color(0xff21BDCA),
+                                style: const TextStyle(
+                                  color: Color(0xFF1A2A80),
                                   fontWeight: FontWeight.w700,
                                   fontSize: 12,
                                 ),

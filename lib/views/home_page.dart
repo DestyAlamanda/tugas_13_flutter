@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:tugas13_flutter/database/db_helper.dart';
-import 'package:tugas13_flutter/model/user.dart';
+import 'package:tugas13_flutter/model/siswa.dart';
+import 'package:tugas13_flutter/textform.dart';
 
 class SiswaHomePage extends StatefulWidget {
   const SiswaHomePage({super.key});
-
+  static const id = "/main";
   static void showAddDialog(BuildContext context, VoidCallback onSuccess) {
     final nameController = TextEditingController();
     final ageController = TextEditingController();
     final yearController = TextEditingController();
+    // final phoneController = TextEditingController();
+    // final passwordController = TextEditingController();
 
     showDialog(
       context: context,
@@ -18,18 +21,26 @@ class SiswaHomePage extends StatefulWidget {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
+            // TextField(
+            //   controller: nameController,
+            //   decoration: InputDecoration(labelText: "Nama"),
+            // ),
+            TextFormConst(
+              hintText: "Nama",
               controller: nameController,
-              decoration: InputDecoration(labelText: "Nama"),
+              keyboardType: TextInputType.name,
             ),
-            TextField(
+            SizedBox(height: 10),
+            TextFormConst(
+              hintText: "Umur",
               controller: ageController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: "Umur"),
             ),
-            TextField(
+            SizedBox(height: 10),
+            TextFormConst(
+              hintText: "Tahun Ajaran",
               controller: yearController,
-              decoration: InputDecoration(labelText: "Tahun Ajaran"),
+              keyboardType: TextInputType.number,
             ),
           ],
         ),
@@ -46,7 +57,13 @@ class SiswaHomePage extends StatefulWidget {
 
               if (name.isNotEmpty && year.isNotEmpty) {
                 await DbHelper.registerSiswa(
-                  Siswa(name: name, age: age, year: year),
+                  Siswa(
+                    name: name,
+                    age: age,
+                    year: year,
+                    // phone: phone,
+                    // password: password,
+                  ),
                 );
                 onSuccess();
                 Navigator.pop(context);
@@ -92,18 +109,22 @@ class SiswaHomePageState extends State<SiswaHomePage> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
+            TextFormConst(
+              hintText: "Nama",
               controller: nameController,
-              decoration: InputDecoration(labelText: "Nama"),
+              keyboardType: TextInputType.name,
             ),
-            TextField(
+            SizedBox(height: 10),
+            TextFormConst(
+              hintText: "Umur",
               controller: ageController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: "Umur"),
             ),
-            TextField(
+            SizedBox(height: 10),
+            TextFormConst(
+              hintText: "Tahun Ajaran",
               controller: yearController,
-              decoration: InputDecoration(labelText: "Tahun Ajaran"),
+              keyboardType: TextInputType.number,
             ),
           ],
         ),
@@ -186,7 +207,45 @@ class SiswaHomePageState extends State<SiswaHomePage> {
                           ),
                           IconButton(
                             icon: Icon(Icons.delete, color: Colors.red),
-                            onPressed: () => deleteStudent(student.id!),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  title: Text("Konfirmasi"),
+                                  content: Text("Yakin untuk dihapus?"),
+                                  actions: [
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                        foregroundColor: Colors.grey,
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text("Batal"),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xFF1A2A80),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                        ),
+                                      ),
+                                      onPressed: () async {
+                                        deleteStudent(student.id!);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "Hapus",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

@@ -1,0 +1,20 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
+class PreferenceHandler {
+  static const String loginKey = "login";
+
+  static Future<void> saveLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(loginKey, true);
+  }
+
+  static Future<bool> getLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(loginKey) ?? false; // default false
+  }
+
+  static Future<void> removeLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(loginKey);
+  }
+}

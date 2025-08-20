@@ -1,21 +1,26 @@
-class Siswa {
-  int? id;
-  String name;
-  int age;
-  String year;
+import 'dart:convert';
 
-  Siswa({this.id, required this.name, required this.age, required this.year});
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+class User {
+  int? id;
+  final String phone;
+  final String password;
+  User({this.id, required this.phone, required this.password});
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'name': name, 'age': age, 'year': year};
+    return <String, dynamic>{'id': id, 'phone': phone, 'password': password};
   }
 
-  factory Siswa.fromMap(Map<String, dynamic> map) {
-    return Siswa(
-      id: map['id'],
-      name: map['name'],
-      age: map['age'],
-      year: map['year'],
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      id: map['id'] != null ? map['id'] as int : null,
+      phone: map['phone'] as String,
+      password: map['password'] as String,
     );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory User.fromJson(String source) =>
+      User.fromMap(json.decode(source) as Map<String, dynamic>);
 }

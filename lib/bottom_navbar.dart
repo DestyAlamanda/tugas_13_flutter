@@ -1,4 +1,3 @@
-// bottom_navbar.dart
 import 'package:flutter/material.dart';
 import 'package:tugas13_flutter/views/about_page.dart';
 import 'package:tugas13_flutter/views/home_page.dart';
@@ -31,19 +30,19 @@ class _BottomNavigatorState extends State<BottomNavigator> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: _selectedIndex == 0
           ? FloatingActionButton(
-              backgroundColor: Color(0xFF1A2A80),
+              backgroundColor: const Color(0xFF1A2A80),
               onPressed: () {
                 SiswaHomePage.showAddDialog(context, () {
                   _homeKey.currentState?.refreshData();
                 });
               },
-              child: Icon(Icons.add, color: Colors.white),
+              child: const Icon(Icons.add, color: Colors.white),
             )
           : null,
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF1A2A80),
+        selectedItemColor: const Color(0xFF1A2A80),
         unselectedItemColor: Colors.grey,
         onTap: (index) => setState(() => _selectedIndex = index),
         items: const [
