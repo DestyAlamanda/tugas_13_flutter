@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugas13_flutter/auth/register.dart';
-import 'package:tugas13_flutter/bottom_navbar.dart';
+import 'package:tugas13_flutter/preference/share_preference.dart'; // Pastikan ini diimpor
+import 'package:tugas13_flutter/views/bottom_navbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,10 +26,13 @@ class _LoginPageState extends State<LoginPage> {
 
     if (phoneController.text.trim() == savedPhone &&
         passwordController.text.trim() == savedPassword) {
+      await PreferenceHandler.saveLogin();
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => BottomNavigator()),
       );
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
@@ -94,10 +98,9 @@ class _LoginPageState extends State<LoginPage> {
                       "Login to access your account",
                       style: TextStyle(fontSize: 14, color: Color(0xFF888888)),
                     ),
-
                     const SizedBox(height: 25),
 
-                    // input no telp
+                    // Phone Input
                     const Text(
                       'Phone Number',
                       style: TextStyle(
@@ -174,7 +177,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 15),
 
-                    // Tombol Submit
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {

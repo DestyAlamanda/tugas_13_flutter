@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tugas13_flutter/auth/login.dart';
-import 'package:tugas13_flutter/extension/navigation.dart';
 import 'package:tugas13_flutter/preference/share_preference.dart';
-import 'package:tugas13_flutter/views/home_page.dart';
+import 'package:tugas13_flutter/views/bottom_navbar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,9 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 3)).then((value) async {
       print(isLogin);
       if (isLogin == true) {
-        context.pushReplacementNamed(SiswaHomePage.id);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const BottomNavigator()),
+        );
       } else {
-        context.push(LoginPage());
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const LoginPage()),
+        );
       }
     });
   }

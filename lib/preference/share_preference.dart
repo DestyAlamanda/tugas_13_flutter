@@ -10,7 +10,7 @@ class PreferenceHandler {
 
   static Future<bool> getLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(loginKey) ?? false; // default false
+    return prefs.getBool(loginKey) ?? false;
   }
 
   static Future<void> removeLogin() async {

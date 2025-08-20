@@ -13,7 +13,15 @@ class LogOutButton extends StatelessWidget {
         PreferenceHandler.removeLogin();
         context.pushReplacementNamed(LoginPage.id);
       },
-      child: Text("Keluar"),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFF1A2A80),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 4,
+      ),
+      child: Text(
+        "Keluar",
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

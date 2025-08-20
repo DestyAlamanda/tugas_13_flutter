@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tugas13_flutter/database/db_helper.dart';
 import 'package:tugas13_flutter/model/siswa.dart';
 import 'package:tugas13_flutter/textform.dart';
+import 'package:tugas13_flutter/views/detail_page.dart';
 
 class SiswaHomePage extends StatefulWidget {
   const SiswaHomePage({super.key});
@@ -10,21 +11,40 @@ class SiswaHomePage extends StatefulWidget {
     final nameController = TextEditingController();
     final ageController = TextEditingController();
     final yearController = TextEditingController();
-    // final phoneController = TextEditingController();
-    // final passwordController = TextEditingController();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: Text("Tambah Siswa"),
+        contentPadding: EdgeInsets.fromLTRB(24, 24, 24, 0),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // TextField(
-            //   controller: nameController,
-            //   decoration: InputDecoration(labelText: "Nama"),
-            // ),
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Color(0xFF1A2A80),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.person_add_rounded,
+                color: Colors.white,
+                size: 28,
+              ),
+            ),
+            SizedBox(height: 16),
+
+            Text(
+              "Tambah Siswa Baru",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1E293B),
+              ),
+            ),
+            SizedBox(height: 16),
+
             TextFormConst(
               hintText: "Nama",
               controller: nameController,
@@ -42,14 +62,29 @@ class SiswaHomePage extends StatefulWidget {
               controller: yearController,
               keyboardType: TextInputType.number,
             ),
+            SizedBox(height: 20),
           ],
         ),
+
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Batal"),
+            child: Text(
+              "Batal",
+              style: TextStyle(
+                color: Color(0xFF1A2A80),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
+
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF1A2A80),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
+            ),
             onPressed: () async {
               final name = nameController.text;
               final age = int.tryParse(ageController.text) ?? 0;
@@ -57,19 +92,13 @@ class SiswaHomePage extends StatefulWidget {
 
               if (name.isNotEmpty && year.isNotEmpty) {
                 await DbHelper.registerSiswa(
-                  Siswa(
-                    name: name,
-                    age: age,
-                    year: year,
-                    // phone: phone,
-                    // password: password,
-                  ),
+                  Siswa(name: name, age: age, year: year),
                 );
                 onSuccess();
                 Navigator.pop(context);
               }
             },
-            child: Text("Simpan"),
+            child: Text("Simpan", style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -105,10 +134,32 @@ class SiswaHomePageState extends State<SiswaHomePage> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: Text("Edit Data Siswa"),
+        contentPadding: EdgeInsets.fromLTRB(24, 24, 24, 0),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Ikon Edit dalam Container
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Color(0xFF1A2A80),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(Icons.edit, color: Colors.white, size: 28),
+            ),
+            SizedBox(height: 16),
+
+            Text(
+              "Edit Data Siswa",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1E293B),
+              ),
+            ),
+            SizedBox(height: 16),
+
             TextFormConst(
               hintText: "Nama",
               controller: nameController,
@@ -126,14 +177,27 @@ class SiswaHomePageState extends State<SiswaHomePage> {
               controller: yearController,
               keyboardType: TextInputType.number,
             ),
+            SizedBox(height: 20),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Batal"),
+            child: Text(
+              "Batal",
+              style: TextStyle(
+                color: Color(0xFF1A2A80),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF1A2A80),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
+            ),
             onPressed: () async {
               final name = nameController.text;
               final age = int.tryParse(ageController.text) ?? 0;
@@ -147,7 +211,7 @@ class SiswaHomePageState extends State<SiswaHomePage> {
                 Navigator.pop(context);
               }
             },
-            child: Text("Update"),
+            child: Text("Update", style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -167,6 +231,7 @@ class SiswaHomePageState extends State<SiswaHomePage> {
           "Data Siswa",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
         backgroundColor: Color(0xFF1A2A80),
         foregroundColor: Colors.white,
       ),
@@ -189,7 +254,9 @@ class SiswaHomePageState extends State<SiswaHomePage> {
                       leading: CircleAvatar(
                         backgroundColor: Color(0xFF1A2A80),
                         child: Text(
-                          student.id?.toString() ?? '',
+                          student.name.isNotEmpty
+                              ? student.name[0].toUpperCase()
+                              : '',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -197,58 +264,134 @@ class SiswaHomePageState extends State<SiswaHomePage> {
                         student.name,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text("${student.age} tahun • ${student.year}"),
+                      subtitle: Text("${student.age} tahun"),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          IconButton(
-                            icon: Icon(Icons.edit, color: Colors.blue),
-                            onPressed: () => showEditDialog(student),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blue.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.edit, color: Colors.blue),
+                              onPressed: () => showEditDialog(student),
+                            ),
                           ),
-                          IconButton(
-                            icon: Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  title: Text("Konfirmasi"),
-                                  content: Text("Yakin untuk dihapus?"),
-                                  actions: [
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        foregroundColor: Colors.grey,
-                                      ),
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text("Batal"),
+
+                          SizedBox(width: 8),
+
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.delete, color: Colors.red),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xFF1A2A80),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            6,
+                                    contentPadding: EdgeInsets.fromLTRB(
+                                      24,
+                                      24,
+                                      24,
+                                      0,
+                                    ),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          width: 60,
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange.withOpacity(
+                                              0.2,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                          ),
+                                          child: Icon(
+                                            Icons.warning_amber_rounded,
+                                            color: Colors.orange,
+                                            size: 32,
+                                          ),
+                                        ),
+                                        SizedBox(height: 16),
+
+                                        Text(
+                                          "Hapus Data Siswa",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            color: Color(0xFF1E293B),
+                                          ),
+                                        ),
+                                        SizedBox(height: 10),
+
+                                        Text(
+                                          "Apakah anda yakin ingin menghapus data siswa ini?",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Color(0xFF475569),
+                                          ),
+                                        ),
+                                        SizedBox(height: 24),
+                                      ],
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          foregroundColor: Colors.grey,
+                                        ),
+                                        onPressed: () => Navigator.pop(context),
+                                        child: Text(
+                                          "Batal",
+                                          style: TextStyle(
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                      onPressed: () async {
-                                        deleteStudent(student.id!);
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        "Hapus",
-                                        style: TextStyle(color: Colors.white),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.orange,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () async {
+                                          deleteStudent(student.id!);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "Hapus",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => DetailPage(student: student),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
