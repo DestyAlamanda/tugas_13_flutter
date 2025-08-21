@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 30),
 
                     ElevatedButton(
                       onPressed: () {
@@ -201,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     Center(
                       child: GestureDetector(
                         onTap: () {

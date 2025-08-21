@@ -52,7 +52,11 @@ class DetailPage extends StatelessWidget {
                   children: [
                     _buildInfoRow(Icons.person, "Nama", student.name),
                     Divider(),
-                    _buildInfoRow(Icons.cake, "Umur", "${student.age} tahun"),
+                    _buildInfoRow(
+                      Icons.assignment_ind,
+                      "NISN",
+                      "${student.no} ",
+                    ),
                     Divider(),
                     _buildInfoRow(Icons.school, "Tahun Ajaran", student.year),
                   ],

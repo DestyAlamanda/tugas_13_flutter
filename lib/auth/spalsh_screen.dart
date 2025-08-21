@@ -40,10 +40,39 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(Icons.school), Text("SMA 113")],
+          children: [
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: Color(0xFF1A2A80),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(Icons.school, size: 60, color: Colors.white),
+            ),
+            SizedBox(height: 16),
+            Text(
+              "VEGAS APP",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF1A2A80),
+              ),
+            ),
+            // SizedBox(height: 10),
+            // Text(
+            //   "Sistem Data Siswa SMAN 113",
+            //   style: TextStyle(
+            //     fontSize: 15,
+            //     fontWeight: FontWeight.bold,
+            //     color: Color(0xFF1A2A80),
+            //   ),
+            // ),
+          ],
         ),
       ),
     );

@@ -230,11 +230,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   color: Colors.white,
                                 ),
                               ),
-                              backgroundColor: Color(0xff21BDCA),
+                              backgroundColor: Color(0xFF1A2A80),
                             ),
                           );
 
-                          Navigator.pop(context); // kembali ke LoginPage
+                          Navigator.pop(context);
                         } else {
                           showDialog(
                             context: context,
@@ -277,7 +277,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 30),
 
-                    // Sign In Link
                     Center(
                       child: GestureDetector(
                         onTap: () {

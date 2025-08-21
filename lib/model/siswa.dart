@@ -3,19 +3,19 @@ import 'dart:convert';
 class Siswa {
   int? id;
   String name;
-  int age;
+  int no;
   String year;
-  Siswa({this.id, required this.name, required this.age, required this.year});
+  Siswa({this.id, required this.name, required this.no, required this.year});
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'id': id, 'name': name, 'age': age, 'year': year};
+    return <String, dynamic>{'id': id, 'name': name, 'no': no, 'year': year};
   }
 
   factory Siswa.fromMap(Map<String, dynamic> map) {
     return Siswa(
       id: map['id'] != null ? map['id'] as int : null,
       name: map['name'] as String,
-      age: map['age'] as int,
+      no: map['no'] as int,
       year: map['year'] as String,
     );
   }

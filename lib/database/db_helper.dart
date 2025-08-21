@@ -10,7 +10,7 @@ class DbHelper {
       join(dbPath, 'siswa.db'),
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE siswa(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INT, year TEXT)',
+          'CREATE TABLE siswa(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, no INT, year TEXT)',
         );
         await db.execute(
           'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, phone TEXT, password TEXT)',

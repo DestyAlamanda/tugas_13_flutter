@@ -41,6 +41,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
           : null,
 
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey[50],
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xFF1A2A80),
         unselectedItemColor: Colors.grey,
