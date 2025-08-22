@@ -41,7 +41,7 @@ class DbHelper {
   static Future<User?> loginSiswa(String phone, String password) async {
     final db = await databaseHelper();
     final List<Map<String, dynamic>> results = await db.query(
-      'siswa',
+      'user',
       where: 'phone = ? AND password = ?',
       whereArgs: [phone, password],
     );

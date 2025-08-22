@@ -188,7 +188,6 @@ class SiswaHomePageState extends State<SiswaHomePage> {
               ),
               const SizedBox(height: 16),
 
-              // Nama
               TextFormConst(
                 hintText: "Nama",
                 controller: nameController,
