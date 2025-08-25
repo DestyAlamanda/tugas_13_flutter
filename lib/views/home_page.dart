@@ -79,10 +79,23 @@ class SiswaHomePage extends StatefulWidget {
               const SizedBox(height: 10),
 
               // Tahun ajaran
-              TextFormConst(
-                hintText: "Tahun Ajaran",
-                controller: yearController,
-                keyboardType: TextInputType.number,
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  hintText: "Tahun Ajaran",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                value: null, // default belum dipilih
+                items: ['2023', '2024', '2025']
+                    .map(
+                      (year) =>
+                          DropdownMenuItem(value: year, child: Text(year)),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  yearController.text = value!; // simpan ke controller
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Tahun ajaran tidak boleh kosong";
@@ -90,6 +103,7 @@ class SiswaHomePage extends StatefulWidget {
                   return null;
                 },
               ),
+
               const SizedBox(height: 20),
             ],
           ),
@@ -218,10 +232,23 @@ class SiswaHomePageState extends State<SiswaHomePage> {
               const SizedBox(height: 10),
 
               // Tahun ajaran
-              TextFormConst(
-                hintText: "Tahun Ajaran",
-                controller: yearController,
-                keyboardType: TextInputType.number,
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  hintText: "Tahun Ajaran",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                value: null,
+                items: ['2023', '2024', '2025']
+                    .map(
+                      (year) =>
+                          DropdownMenuItem(value: year, child: Text(year)),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  yearController.text = value!;
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Tahun ajaran tidak boleh kosong";

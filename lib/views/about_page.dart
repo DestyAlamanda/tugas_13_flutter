@@ -245,8 +245,21 @@ class AboutPage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              //Tombol Logout
-              SizedBox(width: 350, height: 40, child: const LogOutButton()),
+              Card(
+                color: Colors.white,
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 40,
+                    child: const LogOutButton(),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

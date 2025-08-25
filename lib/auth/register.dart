@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "Create Account",
+                      "Buat Akun",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -51,14 +51,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      "Sign up to get started",
+                      "Daftar untuk memulai",
                       style: TextStyle(fontSize: 14, color: Color(0xFF888888)),
                     ),
 
                     const SizedBox(height: 25),
 
                     const Text(
-                      'Full Name',
+                      'Nama Lengkap',
                       style: TextStyle(
                         color: Color(0xff888888),
                         fontSize: 12,
@@ -79,9 +79,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Full name cannot be empty';
+                          return 'Nama lengkap tidak boleh kosong';
                         } else if (value.length < 2) {
-                          return 'Full name must be at least 2 characters';
+                          return 'Nama lengkap harus terdiri dari minimal 2 karakter';
                         }
                         return null;
                       },
@@ -90,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                     // Phone Number Input
                     const Text(
-                      'Phone Number',
+                      'Nomor Telepon',
                       style: TextStyle(
                         color: Color(0xff888888),
                         fontSize: 12,
@@ -111,9 +111,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Phone number cannot be empty';
+                          return 'Nomor telepon tidak boleh kosong';
                         } else if (value.length < 10) {
-                          return 'Phone number must be at least 10 digits';
+                          return 'Nomor telepon harus minimal 10 digit';
                         }
                         return null;
                       },
@@ -122,7 +122,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                     // Password Input
                     const Text(
-                      'Password',
+                      'Kata Sandi',
                       style: TextStyle(
                         color: Color(0xff888888),
                         fontSize: 12,
@@ -157,9 +157,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Password cannot be empty';
+                          return 'Kata sandi tidak boleh kosong';
                         } else if (value.length < 6) {
-                          return 'Password must be at least 6 characters';
+                          return 'Kata sandi harus terdiri dari minimal 6 karakter';
                         }
                         return null;
                       },
@@ -168,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                     // Confirm Password Input
                     const Text(
-                      'Confirm Password',
+                      'Konfirmasi Kata Sandi',
                       style: TextStyle(
                         color: Color(0xff888888),
                         fontSize: 12,
@@ -204,9 +204,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Confirm password cannot be empty';
+                          return 'Konfirmasi kata sandi tidak boleh kosong';
                         } else if (value != passwordController.text) {
-                          return 'Passwords do not match';
+                          return 'Kata sandi tidak cocok';
                         }
                         return null;
                       },
@@ -222,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(
-                                "Registration Success",
+                                "Pendaftaran Berhasil",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 16,
@@ -240,9 +240,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: const Text("Registration Failed"),
+                                title: const Text("Pendaftaran Gagal"),
                                 content: const Text(
-                                  "Please fill all required fields correctly",
+                                  "Harap isi semua kolom yang wajib dengan benar",
                                 ),
                                 backgroundColor: Colors.grey[100],
                                 actions: [
@@ -267,7 +267,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         elevation: 0,
                       ),
                       child: const Text(
-                        "Sign Up",
+                        "Daftar",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -284,7 +284,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         child: Text.rich(
                           TextSpan(
-                            text: "Already have an account? ",
+                            text: "Sudah punya akun? ",
                             style: const TextStyle(
                               color: Color(0xff888888),
                               fontSize: 12,
@@ -292,7 +292,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             children: [
                               TextSpan(
-                                text: 'Sign In',
+                                text: 'Masuk',
                                 style: const TextStyle(
                                   color: Color(0xFF1A2A80),
                                   fontWeight: FontWeight.w700,

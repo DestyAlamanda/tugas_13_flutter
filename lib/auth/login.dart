@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            "Login Success",
+            "Berhasil Masuk",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -52,8 +52,8 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("Login Failed"),
-            content: const Text("Phone number or password is incorrect"),
+            title: const Text("Gagal Masuk"),
+            content: const Text("Nomor telepon atau kata sandi salah"),
             backgroundColor: Colors.grey[100],
             actions: [
               TextButton(
@@ -76,18 +76,27 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 30,
-                vertical: 120,
+            const SizedBox(height: 80),
+
+            // Container Icon Sekolah
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: const Color(0xFF1A2A80),
+                borderRadius: BorderRadius.circular(8),
               ),
+              child: const Icon(Icons.school, size: 60, color: Colors.white),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
               child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "Welcome Back",
+                      "Selamat Datang",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -95,14 +104,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      "Login to access your account",
+                      "Masuk untuk mengakses akun Anda",
                       style: TextStyle(fontSize: 14, color: Color(0xFF888888)),
                     ),
                     const SizedBox(height: 25),
 
                     // Phone Input
                     const Text(
-                      'Phone Number',
+                      'Nomor Telepon',
                       style: TextStyle(
                         color: Color(0xff888888),
                         fontSize: 12,
@@ -123,9 +132,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Phone number cannot be empty';
+                          return 'Nomor telepon tidak boleh kosong';
                         } else if (value.length < 10) {
-                          return 'Phone number must be at least 10 digits';
+                          return 'Nomor telepon harus terdiri dari minimal 10 digit';
                         }
                         return null;
                       },
@@ -133,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 20),
 
                     const Text(
-                      'Password',
+                      'Kata Sandi',
                       style: TextStyle(
                         color: Color(0xff888888),
                         fontSize: 12,
@@ -168,9 +177,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Password cannot be empty';
+                          return 'Kata sandi tidak boleh kosong';
                         } else if (value.length < 6) {
-                          return 'Password must be at least 6 characters';
+                          return 'Kata sandi harus terdiri dari minimal 6 karakter';
                         }
                         return null;
                       },
@@ -192,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                         elevation: 0,
                       ),
                       child: const Text(
-                        "Login",
+                        "Masuk",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -214,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: Text.rich(
                           TextSpan(
-                            text: "Don't have an account? ",
+                            text: "Belum punya akun? ",
                             style: const TextStyle(
                               color: Color(0xff888888),
                               fontSize: 12,
@@ -222,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             children: [
                               TextSpan(
-                                text: 'Sign Up',
+                                text: 'Daftar',
                                 style: const TextStyle(
                                   color: Color(0xFF1A2A80),
                                   fontWeight: FontWeight.w700,
